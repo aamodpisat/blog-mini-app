@@ -6,7 +6,7 @@ var Stack = contentstack.Stack();
 
  var blog = {
      //to get list of posts
-     getPosts : function(options){
+     getPosts : function (options){
          var skip, limit;
          if(options){
            skip = options.skip;
@@ -40,7 +40,7 @@ var Stack = contentstack.Stack();
              .find()
      },
      //to get posts by category
-     getPostsByCategory: function(category){
+     getPostsByCategory: function (category){
          var data = {};
          var category_regex= new RegExp(category,"i");
          var author_post_query = Stack.ContentType("post").Query();
@@ -51,7 +51,7 @@ var Stack = contentstack.Stack();
 
      },
      //to get list of authors
-     getAuthors: function(options){
+     getAuthors: function (options){
          var skip, limit;
          if(options){
              skip = options.skip;
@@ -67,7 +67,7 @@ var Stack = contentstack.Stack();
              .find()
      },
      //to get list of posts by Author
-     getPostsByAuthor: function(author){
+     getPostsByAuthor: function (author){
          var data={};
          var author_regex= new RegExp(author,"i");
          var author_post_query = Stack.ContentType("post").Query();
