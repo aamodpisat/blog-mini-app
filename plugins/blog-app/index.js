@@ -18,14 +18,12 @@ module.exports = function BlogApp() {
                 };
                 Blog.getPosts(options)
                     .spread(function success(entries) {
-                    if (entries.length > 0) {
                         var data= {};
-                        data['post'] = entries;
+                        data['posts'] = entries;
                         res.send(data);
-                    }else{
-                        res.send({'error':"No results found"});
-                    }
-                });
+                }, function fail(err) {
+                        res.send("Something went wrong");
+                    });
             });
     };
 };

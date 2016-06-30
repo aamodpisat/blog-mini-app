@@ -4,7 +4,7 @@
 var contentstack= require('contentstack-express');
 var Stack = contentstack.Stack();
 
- var blog = {
+ var Blog = {
      _getPosts : function() {
          return Stack.ContentType("post").Query();
      },
@@ -25,7 +25,7 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of posts by Category
       */
-     getPostsByCategory : function (category){
+     getPostsByCategory : function (category) {
           var postsQuery = this._getPosts();
           return postsQuery
               .where("category.title", category)
@@ -45,7 +45,7 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of posts by Tag
       */
-     getPostsByTag : function(tag) {
+     getPostsByTag : function (tag) {
          var postsQuery = this._getPosts();
          return postsQuery
              .where("tags", tag)
@@ -58,8 +58,7 @@ var Stack = contentstack.Stack();
      getCategories : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
-         var categoriesQuery = this._getPosts();
-         return categoriesQuery
+         return Stack.ContentType("categories").Query()
              .skip(skip)
              .limit(limit)
              .includeCount()
@@ -72,21 +71,17 @@ var Stack = contentstack.Stack();
      getAuthors : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
-         var authorsQuery = this._getPosts();
-         return authorsQuery
+         return Stack.ContentType("authors").Query()
              .skip(skip)
              .limit(limit)
              .toJSON()
              .find()
      },
      /*
-      * To get the list of Tags
+      * TODO : Fixing the list of blog page
       */
      getTags : function() {
-         var tagQuery = this._getPosts();
-         return tagQuery
-             .toJSON()
-             .find()
+         return {};
      }
  };
-module.exports = blog;
+module.exports = Blog;
