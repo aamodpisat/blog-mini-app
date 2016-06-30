@@ -15,13 +15,9 @@ module.exports = function Blog() {
       app
           .extends()
           .get("/",function(req,res,next) {
-              var skip=0, limit= 5;
-              if (req.xhr) {
-                  skip = parseInt(req.query.skip);
-              }
               var options = {
-                  'skip':skip,
-                  'limit':limit
+                  'skip':0,
+                  'limit':5
               };
               var query = BlogsFunction.getPosts(options);
                   query.spread(function success(entry){
