@@ -11,7 +11,7 @@ var contentstack =  require('contentstack-express'),
     Blog = require('./blog');
 module.exports = function BlogApp() {
     BlogApp.serverExtends = function(app) {
-        app.get("/blog", function(req, res, next) {
+        app.get("/blog", function(req, res) {
                 var options = {
                     'skip':0,
                     'limit':5
@@ -22,7 +22,7 @@ module.exports = function BlogApp() {
                         data['posts'] = entries;
                         res.send(data);
                 }, function fail(err) {
-                        res.send("Something went wrong");
+                        console.log("Something went wrong");
                     });
             });
     };
