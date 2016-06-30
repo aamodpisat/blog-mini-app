@@ -22,7 +22,7 @@ module.exports = function BlogApp() {
                         data['posts'] = entries;
                         res.send(data);
                 }, function fail(err) {
-                        console.log("Something went wrong");
+                        res.send("Something went wrong")
                     });
             });
     };
