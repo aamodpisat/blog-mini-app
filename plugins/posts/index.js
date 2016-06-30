@@ -15,9 +15,7 @@ module.exports = function Posts() {
   
   Posts.templateExtends = function(engine) {
   };
-  
 
-  
   Posts.serverExtends = function(app) {
       app
           .extends()
@@ -65,9 +63,6 @@ module.exports = function Posts() {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
       }
   };
-  
-
-  
   Posts.beforePublish = function (data, next) {
     next();
   };

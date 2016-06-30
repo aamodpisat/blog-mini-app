@@ -11,7 +11,7 @@ module.exports = exports = {
         }
     ],
     plugins: {
-        "blog" :{
+        "blog-app" :{
             "limit" :  "",
             "skip" : "",
             "widgets":{
@@ -26,9 +26,7 @@ module.exports = exports = {
                 "tags" : {}
             }
         },
-        "posts":{},
-        "myplugin":null
-
+        "posts":{}
     },
     "indexes": {
         "authors": ["title", "uid"],
