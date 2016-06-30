@@ -18,7 +18,7 @@ module.exports = function BlogApp() {
                 };
                 Blog.getPosts(options)
                     .spread(function success(entries) {
-                    if(entries.length > 0) {
+                    if (entries.length > 0) {
                         var data= {};
                         data['post'] = entries;
                         res.send(data);
