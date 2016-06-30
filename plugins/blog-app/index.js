@@ -23,7 +23,7 @@ module.exports = function BlogApp() {
                         data['post'] = entries;
                         res.send(data);
                     }else{
-                        res.send("No results found");
+                        res.send({'error':"No results found"});
                     }
                 });
             });
