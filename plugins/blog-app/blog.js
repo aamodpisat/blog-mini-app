@@ -5,13 +5,13 @@ var contentstack= require('contentstack-express');
 var Stack = contentstack.Stack();
 
  var blog = {
-     _getPosts : function(){
+     _getPosts : function() {
          return Stack.ContentType("post").Query();
      },
      /*
       * To get the list of posts
       */
-     getPosts : function (options){
+     getPosts : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
          var postsQuery = this._getPosts();
@@ -21,34 +21,31 @@ var Stack = contentstack.Stack();
              .limit(limit)
              .toJSON()
              .find()
-
      },
      /*
       * To get the list of posts by Category
       */
-     getPostsByCategory: function (category){
+     getPostsByCategory : function (category){
           var postsQuery = this._getPosts();
           return postsQuery
               .where("category.title", category)
               .toJSON()
               .find()
-
      },
      /*
       * To get the list of posts by Author
       */
-     getPostsByAuthor: function (author){
+     getPostsByAuthor : function (author) {
          var postsQuery = this._getPosts();
          return postsQuery
              .where("author.title", author)
              .toJSON()
              .find()
-
      },
      /*
       * To get the list of posts by Tag
       */
-     getPostsByTag : function(tag){
+     getPostsByTag : function(tag) {
          var postsQuery = this._getPosts();
          return postsQuery
              .where("tags", tag)
@@ -58,7 +55,7 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of Category
       */
-     getCategories: function (options){
+     getCategories : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
          var categoriesQuery = this._getPosts();
@@ -72,7 +69,7 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of Authors
       */
-     getAuthors: function (options){
+     getAuthors : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
          var authorsQuery = this._getPosts();
@@ -85,7 +82,7 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of Tags
       */
-     getTags: function(){
+     getTags : function() {
          var tagQuery = this._getPosts();
          return tagQuery
              .toJSON()
