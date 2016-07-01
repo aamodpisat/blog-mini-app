@@ -4,7 +4,6 @@
 var Blog = require('./blog');
 module.exports = function(app) {
     app.get("/category/:category", function(req, res) {
-        console.log("True");
         var category = req.params.category;
         Blog.getPostsByCategory(category)
             .spread(function success(entries) {
