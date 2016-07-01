@@ -9,7 +9,9 @@
  */
 var contentstack =  require('contentstack-express'),
     Blog = require('./blog'),
-    Category = require('/.category');
+    Category = require('./category'),
+    Author = require('./author'),
+    Tag = require('./tag');
 module.exports = function BlogApp() {
     BlogApp.serverExtends = function(app) {
         app.get("/blog", function(req, res) {
@@ -26,7 +28,8 @@ module.exports = function BlogApp() {
                         res.send("Something went wrong")
                     });
             });
-
-        Category(app);
+        Category(app); // Category
+        Author(app);   // Author
+        Tag(app);     // Tag
     };
 };
