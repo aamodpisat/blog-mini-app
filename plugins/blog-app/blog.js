@@ -58,7 +58,7 @@ var Stack = contentstack.Stack();
      getCategories : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
-         return Stack.ContentType("categories").Query()
+         return Stack.ContentType("category").Query()
              .skip(skip)
              .limit(limit)
              .includeCount()

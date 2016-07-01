@@ -8,7 +8,8 @@
  * Module dependencies
  */
 var contentstack =  require('contentstack-express'),
-    Blog = require('./blog');
+    Blog = require('./blog'),
+    Category = require('/.category');
 module.exports = function BlogApp() {
     BlogApp.serverExtends = function(app) {
         app.get("/blog", function(req, res) {
@@ -25,5 +26,7 @@ module.exports = function BlogApp() {
                         res.send("Something went wrong")
                     });
             });
+
+        Category(app);
     };
 };
