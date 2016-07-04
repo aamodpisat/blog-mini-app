@@ -8,28 +8,16 @@
  * Module dependencies
  */
 var contentstack =  require('contentstack-express'),
-    Blog = require('./blog'),
-    Category = require('./category'),
-    Author = require('./author'),
-    Tag = require('./tag');
+    Blog = require('./models/blog'),
+    Homepage = require('./routes/homepage'),
+    Category = require('./routes/category'),
+    Author = require('./routes/author'),
+    Tag = require('./routes/tag');
 module.exports = function BlogApp() {
     BlogApp.serverExtends = function(app) {
-        app.get("/blog", function(req, res) {
-                var options = {
-                    'skip':0,
-                    'limit':5
-                };
-                Blog.getPosts(options)
-                    .spread(function success(entries) {
-                        var data= {};
-                        data['posts'] = entries;
-                        res.send(data);
-                }, function fail(err) {
-                        res.send("Something went wrong")
-                    });
-            });
-        Category(app); // Category
-        Author(app);   // Author
-        Tag(app);     // Tag
+        Homepage(app);      // Homepage Route
+        Category(app); // Category Route
+        Author(app);   // Author Route
+        Tag(app);     // Tag Route
     };
 };

@@ -1,7 +1,7 @@
 /**
  * Created by Aamod Pisat on 01-07-2016.
  */
-var Blog = require('./blog');
+var Blog = require('./../models/blog');
 module.exports = function(app){
     app.get("/tag/:tag", function(req, res) {
         var tag = req.params.tag;
