@@ -12,19 +12,7 @@ module.exports = exports = {
     ],
     plugins: {
         "blog-app" :{
-            "limit" :  "",
-            "skip" : "",
-            "widgets":{
-                "category":{
-                    "limit": "",
-                    "skip":  ""
-                },
-                "authors":{
-                    "limit":"",
-                    "skip" :""
-                },
-                "tags" : {}
-            }
+            'baseRoute' : '/blog'
         },
         "posts":{}
     },

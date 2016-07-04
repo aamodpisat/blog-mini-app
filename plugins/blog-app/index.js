@@ -1,23 +1,22 @@
 /*!
  * blog
  */
-
 "use strict";
-
 /*!
  * Module dependencies
  */
 var contentstack =  require('contentstack-express'),
-    Blog = require('./models/blog'),
-    Homepage = require('./routes/homepage'),
+    Home = require('./routes/home'),
     Category = require('./routes/category'),
     Author = require('./routes/author'),
     Tag = require('./routes/tag');
 module.exports = function BlogApp() {
+    var options = BlogApp.options,
+        baseRoute =  options.baseRoute || '/';
     BlogApp.serverExtends = function(app) {
-        Homepage(app);      // Homepage Route
-        Category(app); // Category Route
-        Author(app);   // Author Route
-        Tag(app);     // Tag Route
+        app.use(baseRoute,Home); // Home Route
+        app.use(baseRoute,Category); // Category route
+        app.use(baseRoute,Author); // Author Route
+        app.use(baseRoute,Tag); // Tag Route
     };
 };
