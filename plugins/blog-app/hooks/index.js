@@ -3,7 +3,7 @@
  */
 module.exports = function (app , Blog) {
     /*
-       To add data model to your routes
+     * To add data model to your routes
      */
     app.use('/', function (req, res, next) {
         var options= {};
