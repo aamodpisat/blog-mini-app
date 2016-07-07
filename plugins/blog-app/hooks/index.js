@@ -10,8 +10,20 @@ module.exports = function(app) {
         var options= {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                //var categories = entries;
-                req.getViewContext().set("categories", entries); // user will set key and data
+                var Category  = {
+                    'setData': function(key) {
+                        if(key) {
+                            return req.getViewContext().set(key, entries);
+                        }
+                    },
+                    'getData': function(key) {
+                        if(key){
+                            Category.setData(key);
+                            return req.getViewContext().get(key)
+                        }
+                    }
+                };
+                req.categories = Category.getData("categories");
                 next();
             });
     });

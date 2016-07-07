@@ -14,7 +14,7 @@ module.exports = function BlogApp() {
     var options = BlogApp.options,
         baseRoute =  options.baseRoute || '/';
     BlogApp.serverExtends = function(app) {
-        var Hooks = require('./hooks/index')(app); // To attach data model with routes
+        var Hooks = require('./hooks/index')(app);
         app.use(baseRoute, Home); // Home Route
         app.use(baseRoute, Category); // Category route
         app.use(baseRoute, Author); // Author Route
