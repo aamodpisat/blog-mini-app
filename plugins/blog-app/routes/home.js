@@ -14,7 +14,7 @@ Router.get('/', function(req, res){
     Blog.getPosts(options)
         .spread(function success(entries) {
             var data= {};
-            data['categories'] = req.getViewContext().get("categories");
+            data['categories'] = req.getViewContext().get("categories"); // user will get key
             data['posts'] = entries;
             res.send(data);
         }, function fail(err) {

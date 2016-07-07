@@ -11,7 +11,7 @@ module.exports = function(app) {
         Blog.getCategories(options)
             .spread(function success(entries) {
                 //var categories = entries;
-                req.getViewContext().set("categories", entries);
+                req.getViewContext().set("categories", entries); // user will set key and data
                 next();
             });
     });
