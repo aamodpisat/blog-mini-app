@@ -10,7 +10,10 @@ module.exports = function(app) {
         var options= {};
         Blog.getCategories(options)
             .spread(function success(entries) {
+                //var categories = entries;
+                req.getViewContext().set("categories", entries);
                 next();
             });
     });
+
 };

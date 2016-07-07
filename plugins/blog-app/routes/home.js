@@ -14,6 +14,7 @@ Router.get('/', function(req, res){
     Blog.getPosts(options)
         .spread(function success(entries) {
             var data= {};
+            data['categories'] = req.getViewContext().get("categories");
             data['posts'] = entries;
             res.send(data);
         }, function fail(err) {
