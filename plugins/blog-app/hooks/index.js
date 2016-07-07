@@ -24,11 +24,25 @@ module.exports = function(app) {
                     }
                 };
                 req.categories = Category.getData("categories");
-                next();
+                //next();
             });
         Blog.getAuthors(options)
             .spread(function success(entries) {
-
+                var Author  = {
+                    'setData': function(key) {
+                        if(key) {
+                            return req.getViewContext().set(key, entries);
+                        }
+                    },
+                    'getData': function(key) {
+                        if(key){
+                            Author.setData(key);
+                            return req.getViewContext().get(key)
+                        }
+                    }
+                };
+                req.authors = Author.getData("authors");
+                next();
             });
     });
 
