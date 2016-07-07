@@ -26,6 +26,10 @@ module.exports = function(app) {
                 req.categories = Category.getData("categories");
                 next();
             });
+        Blog.getAuthors(options)
+            .spread(function success(entries) {
+
+            });
     });
 
 };
