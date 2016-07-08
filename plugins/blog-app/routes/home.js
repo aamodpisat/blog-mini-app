@@ -14,8 +14,6 @@ Router.get('/', function(req, res){
     Blog.getPosts(options)
         .spread(function success(entries) {
             var data= {};
-            data['categories'] = req.getCategoriesData('categories');
-            data['authors'] = req.authors;
             data['posts'] = entries;
             res.send(data);
         }, function fail(err) {
@@ -23,3 +21,8 @@ Router.get('/', function(req, res){
         });
 });
 module.exports = Router;
+
+
+var a = {"post": "1}
+var b = {"blog": "2}"
+    data = a.merge(b)

@@ -6,30 +6,27 @@ module.exports = function(app) {
     /*
      * To add data model to your routes
      */
-    app.use('/', function(req, res, next) {
-        var options= {};
+    app.use('/blog', function(req, res, next) {
+        var options= {}, data= {};
+        var data1 =  {
+              'set' : function(key, value) {
+                  if(typeof key== 'string') {
+                      return req.getViewContext().set(key, value);
+                  } else {
+                      console.log("key must be in string");
+                  }
+              },
+              'get' : function(key, value) {
+                  if(typeof key == 'string') {
+                      data1.set(key, value);
+                      return req.getViewContext().get(key);
+                  }
+              }
+        };
         Blog.getCategories(options)
             .spread(function success(entries) {
-               req.getCategoriesData = function(key) {
-                 if(key && typeof key == 'string') {
-                    req.getViewContext().set(key, entries);
-                    return req.getViewContext().get(key);
-                 } else {
-                     console.log("Please specify key and it must be a string");
-                 }
-               };
-            });
-        Blog.getAuthors(options)
-            .spread(function success(entries) {
-                var getAuthorsData = function(key) {
-                    if(typeof key == 'string') {
-                        req.getViewContext().set(key, entries);
-                        return req.getViewContext().get(key);
-                    } else {
-                        console.log("Please specify key and it must be a string");
-                    }
-                };
-                req.authors = getAuthorsData("authors");
+                data['categories'] =  data1.get('entries', entries);
+                //console.log("===============", data1.get('entries', entries));
                 next();
             });
     });
