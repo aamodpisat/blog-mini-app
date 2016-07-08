@@ -21,7 +21,7 @@ module.exports = function(app) {
             });
         Blog.getAuthors(options)
             .spread(function success(entries) {
-                var getAuthorData = function(key) {
+                var getAuthorsData = function(key) {
                     if(typeof key == 'string') {
                         req.getViewContext().set(key, entries);
                         return req.getViewContext().get(key);
@@ -29,7 +29,7 @@ module.exports = function(app) {
                         console.log("Please specify key and it must be a string");
                     }
                 };
-                req.authors = getAuthorData("authors");
+                req.authors = getAuthorsData("authors");
                 next();
             });
     });
