@@ -10,38 +10,14 @@ module.exports = function(app) {
         var options= {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                var Category  = {
-                    'setData': function(key) {
-                        if(key) {
-                            return req.getViewContext().set(key, entries);
-                        }
-                    },
-                    'getData': function(key) {
-                        if(key){
-                            Category.setData(key);
-                            return req.getViewContext().get(key)
-                        }
-                    }
-                };
-                req.categories = Category.getData("categories");
-                //next();
-            });
-        Blog.getAuthors(options)
-            .spread(function success(entries) {
-                var Author  = {
-                    'setData': function(key) {
-                        if(key) {
-                            return req.getViewContext().set(key, entries);
-                        }
-                    },
-                    'getData': function(key) {
-                        if(key){
-                            Author.setData(key);
-                            return req.getViewContext().get(key)
-                        }
-                    }
-                };
-                req.authors = Author.getData("authors");
+               req.getData = function(key) {
+                 if(key && typeof key == 'string') {
+                    req.getViewContext().set(key, entries);
+                    return req.getViewContext().get(key);
+                 }else{
+                     console.log("Please specify key and it must be a string");
+                 }
+               };
                 next();
             });
     });
