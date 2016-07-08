@@ -10,7 +10,7 @@ module.exports = function(app) {
         var options= {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-               req.getData = function(key) {
+               req.getCategoriesData = function(key) {
                  if(key && typeof key == 'string') {
                     req.getViewContext().set(key, entries);
                     return req.getViewContext().get(key);
@@ -21,7 +21,7 @@ module.exports = function(app) {
             });
         Blog.getAuthors(options)
             .spread(function success(entries) {
-                var getData = function(key) {
+                var getAuthorData = function(key) {
                     if(typeof key == 'string') {
                         req.getViewContext().set(key, entries);
                         return req.getViewContext().get(key);
@@ -29,9 +29,8 @@ module.exports = function(app) {
                         console.log("Please specify key and it must be a string");
                     }
                 };
-                req.authors = getData("authors");
+                req.authors = getAuthorData("authors");
                 next();
             });
     });
-
 };
