@@ -21,8 +21,3 @@ Router.get('/', function(req, res){
         });
 });
 module.exports = Router;
-
-
-var a = {"post": "1}
-var b = {"blog": "2}"
-    data = a.merge(b)
