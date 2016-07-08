@@ -15,6 +15,7 @@ Router.get('/', function(req, res){
         .spread(function success(entries) {
             var data= {};
             data['categories'] = req.getData('categories');
+            data['authors'] = req.authors;
             data['posts'] = entries;
             res.send(data);
         }, function fail(err) {

@@ -14,10 +14,22 @@ module.exports = function(app) {
                  if(key && typeof key == 'string') {
                     req.getViewContext().set(key, entries);
                     return req.getViewContext().get(key);
-                 }else{
+                 } else {
                      console.log("Please specify key and it must be a string");
                  }
                };
+            });
+        Blog.getAuthors(options)
+            .spread(function success(entries) {
+                var getData = function(key) {
+                    if(typeof key == 'string') {
+                        req.getViewContext().set(key, entries);
+                        return req.getViewContext().get(key);
+                    } else {
+                        console.log("Please specify key and it must be a string");
+                    }
+                };
+                req.authors = getData("authors");
                 next();
             });
     });
