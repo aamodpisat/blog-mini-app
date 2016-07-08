@@ -10,7 +10,6 @@ Router.get('/category/:category', function(req, res) {
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            data['categories'] = req.getData("category");
             res.send(data);
         }, function fail(err) {
             res.send("Something went wrong")
