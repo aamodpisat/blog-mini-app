@@ -11,7 +11,7 @@ module.exports = function(app, baseRoute) {
         'TagPage' : baseRoute + '/tag/'
     };
     /*
-     * To add data model to all routes
+     * To add data model to All routes
      */
     app.use(Routes.all, function(req, res, next) {
         var options = {};
@@ -41,7 +41,7 @@ module.exports = function(app, baseRoute) {
             });
     });
     /*
-     * To attach data model to your Category route
+     * To add data model to your Category route
      */
     app.use(Routes.CategoryPage, function(req, res, next) {
         var options = {};
@@ -52,7 +52,7 @@ module.exports = function(app, baseRoute) {
             });
     });
     /*
-     * To attach data model to your Author route
+     * To add data model to your Author route
      */
     app.use(Routes.AuthorPage, function(req, res, next) {
         var options = {};
