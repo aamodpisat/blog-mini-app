@@ -3,8 +3,7 @@
  */
 var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
-    Blog = require('./../models/blog'),
-    _ = require('lodash');
+    Blog = require('./../models/blog');
 Router.get('/', function(req, res) {
    var skip = parseInt(req.query.skip) || 0;
    var limit= parseInt(req.query.limit) || 5;
@@ -16,7 +15,6 @@ Router.get('/', function(req, res) {
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            _.merge(data, req.entries); // to merge the context data
             res.send(data);
         }, function fail(err) {
             res.send("Something went wrong");

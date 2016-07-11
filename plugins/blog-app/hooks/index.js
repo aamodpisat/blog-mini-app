@@ -2,38 +2,64 @@
  * Created by Aamod Pisat on 04-07-2016.
  */
 var Blog = require('./../models/blog');
-module.exports = function(app) {
+module.exports = function(app, baseRoute) {
+    var Routes = {
+        'all' : '*',
+        'Homepage' : baseRoute,
+        'CategoryPage' : baseRoute + '/category/',
+        'AuthorPage' : baseRoute + '/author/',
+        'TagPage' : baseRoute + '/tag/'
+    };
     /*
-     * To add data model to your routes
+     * To add data model to all routes
      */
-    app.use('/blog', function(req, res, next) {
+    app.use(Routes.all, function(req, res, next) {
         var options = {};
-        req.response = function() {
-            req.entries = req.entries || {};
-            return {
-                'setData' : function(key, value) {
-                    if(typeof key == 'string') {
-                        req.entries[key] = value;
-                    }else {
-                        console.log("Key must be in string");
-                    }
-                },
-                'getData' : function(key) {
-                    if(typeof key == "string") {
-                        return req.entries[key];
-                    }
-                }
-            }
-        };
         Blog.getCategories(options)
             .spread(function success(entries) {
-                req.response().setData("categories", entries);
+                req.getViewContext().set("categories", entries);
             });
         Blog.getAuthors(options)
             .spread(function success(entries) {
-                req.response().setData("authors", entries);
+                req.getViewContext().set("authors", entries);
                 next();
             });
     });
-
+    /*
+     * To add data model to your Homepage route
+     */
+    app.use(Routes.Homepage, function(req, res, next) {
+        var options = {};
+        Blog.getCategories(options)
+            .spread(function success(entries) {
+                req.getViewContext().set("categories", entries);
+            });
+        Blog.getAuthors(options)
+            .spread(function success(entries) {
+                req.getViewContext().set("authors", entries);
+                next();
+            });
+    });
+    /*
+     * To attach data model to your Category route
+     */
+    app.use(Routes.CategoryPage, function(req, res, next) {
+        var options = {};
+        Blog.getAuthors(options)
+            .spread(function success(entries) {
+                req.getViewContext().set("authors", entries);
+                next();
+            });
+    });
+    /*
+     * To attach data model to your Author route
+     */
+    app.use(Routes.AuthorPage, function(req, res, next) {
+        var options = {};
+        Blog.getCategories(options)
+            .spread(function success(entries) {
+                req.getViewContext().set("categories", entries);
+                next();
+            });
+    });
 };
