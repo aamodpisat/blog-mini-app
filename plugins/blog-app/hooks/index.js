@@ -9,18 +9,18 @@ module.exports = function(app) {
     app.use('/blog', function(req, res, next) {
         var options= {};
         req.response = function() {
-            req.entry = req.entry || {};
+            req.entries = req.entries || {};
             return {
                 'setData' : function(key, value) {
                     if(typeof key == 'string') {
-                        req.entry[key] = value;
+                        req.entries[key] = value;
                     }else {
                         console.log("Key must be in string");
                     }
                 },
                 'getData' : function(key) {
                     if(typeof key == "string") {
-                        return req.entry[key];
+                        return req.entries[key];
                     }
                 }
             }
@@ -33,7 +33,7 @@ module.exports = function(app) {
             .spread(function success(entries) {
                 req.response().setData("authors", entries);
                 next();
-            })
+            });
     });
 
 };

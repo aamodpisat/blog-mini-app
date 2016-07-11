@@ -16,7 +16,7 @@ Router.get('/', function(req, res) {
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            _.merge(data, req.entry); // to merge the context data
+            _.merge(data, req.entries); // to merge the context data
             res.send(data);
         }, function fail(err) {
             res.send("Something went wrong");
