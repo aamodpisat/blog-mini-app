@@ -9,7 +9,7 @@ Router.get('/', function(req, res) {
    var skip = parseInt(req.query.skip) || 0;
    var limit= parseInt(req.query.limit) || 5;
     var options = {
-       'skip' : skip ,
+       'skip' : skip,
        'limit': limit
    };
     Blog.getPosts(options)
