@@ -12,13 +12,8 @@ module.exports = exports = {
     ],
     plugins: {
         "blog-app" :{
-            'Routes' :{
-                'All' : '*',
-                'baseRoute' :'/blog',
-                'AuthorPage' : '/author/',
-                'CategoryPage' :'/category/',
-                'TagPage' : '/tag/'
-            }
+            'baseRoute':'/blog',
+            'viewBasePath' : '/pages/blogs-app/'
         },
         "posts":{}
     },

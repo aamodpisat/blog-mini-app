@@ -11,7 +11,7 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of posts
       */
-     getPosts : function (options) {
+     getRecentPosts : function (options) {
          var skip = options.skip || 0,
              limit = options.limit || 5;
          var postsQuery = this._getPosts();

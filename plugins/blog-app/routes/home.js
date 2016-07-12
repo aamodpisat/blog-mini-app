@@ -11,11 +11,11 @@ Router.get('/', function(req, res) {
        'skip' : skip,
        'limit': limit
    };
-    Blog.getPosts(options)
+    Blog.getRecentPosts(options)
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            res.send(data);
+            res.render('pages/blogs-app/home.html', data);
         }, function fail(err) {
             res.send("Something went wrong");
         });

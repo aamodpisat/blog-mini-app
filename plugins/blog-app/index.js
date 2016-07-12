@@ -12,10 +12,10 @@ var contentstack =  require('contentstack-express'),
     Tag = require('./routes/tag');
 module.exports = function BlogApp() {
     var options = BlogApp.options,
-        Routes = options.Routes,
-        baseRoute =  Routes.baseRoute || '/';
+        baseRoute =  options.baseRoute || '/',
+        viewBasePath = options.viewBasePath;
     BlogApp.serverExtends = function(app) {
-        var Hooks = require('./hooks/index')(app, Routes); //Hooks
+        var Hooks = require('./hooks/index')(app); //Hooks
         app.use(baseRoute, Home); // Home Route
         app.use(baseRoute, Category); // Category route
         app.use(baseRoute, Author); // Author Route
