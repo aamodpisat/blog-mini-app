@@ -12,7 +12,13 @@ module.exports = exports = {
     ],
     plugins: {
         "blog-app" :{
-            'baseRoute' : '/blog'
+            'Routes' :{
+                'All' : '*',
+                'baseRoute' :'/blog',
+                'AuthorPage' : '/author/',
+                'CategoryPage' :'/category/',
+                'TagPage' : '/tag/'
+            }
         },
         "posts":{}
     },

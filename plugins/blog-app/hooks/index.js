@@ -2,18 +2,11 @@
  * Created by Aamod Pisat on 04-07-2016.
  */
 var Blog = require('./../models/blog');
-module.exports = function(app, baseRoute) {
-    var Routes = {
-        'all' : '*',
-        'Homepage' : baseRoute,
-        'CategoryPage' : baseRoute + '/category/',
-        'AuthorPage' : baseRoute + '/author/',
-        'TagPage' : baseRoute + '/tag/'
-    };
+module.exports = function(app, Routes) {
     /*
      * To add data model to All routes
      */
-    app.use(Routes.all, function(req, res, next) {
+    app.use(Routes.All, function(req, res, next) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
@@ -28,7 +21,7 @@ module.exports = function(app, baseRoute) {
     /*
      * To add data model to your Homepage route
      */
-    app.use(Routes.Homepage, function(req, res, next) {
+    app.use(Routes.baseRoute, function(req, res, next) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
