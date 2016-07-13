@@ -5,15 +5,14 @@
 /*!
  * Module dependencies
  */
-var contentstack =  require('contentstack-express'),
-    Home = require('./routes/home'),
-    Category = require('./routes/category'),
-    Author = require('./routes/author'),
-    Tag = require('./routes/tag');
+var contentstack =  require('contentstack-express');
 module.exports = function BlogApp() {
     var options = BlogApp.options,
-        baseRoute =  options.baseRoute || '/',
-        viewBasePath = options.viewBasePath;
+        baseRoute =  options.baseRoute || '/';
+    var Home = require('./routes/home')(options),
+        Category = require('./routes/category')(options),
+        Author = require('./routes/author')(options),
+        Tag = require('./routes/tag')(options);
     BlogApp.serverExtends = function(app) {
         var Hooks = require('./hooks/index')(app); //Hooks
         app.use(baseRoute, Home); // Home Route

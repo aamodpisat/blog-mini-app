@@ -3,16 +3,24 @@
  */
 var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
-    Blog = require('./../models/blog');
+    Blog = require('./../models/blog'),
+    options = {};
 Router.get('/tag/:tag', function(req, res) {
     var tag = req.params.tag;
     Blog.getPostsByTag(tag)
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            res.send(data);
+            if(options.viewBasePath){
+                res.render(options.viewBasePath + 'tag.html', data);
+            } else {
+                res.send(data);
+            }
         }, function fail(err) {
             res.send("Something went wrong")
         });
 });
-module.exports = Router;
+module.exports = function(opts) {
+    options = opts;
+    return Router;
+};

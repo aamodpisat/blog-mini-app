@@ -3,16 +3,26 @@
  */
 var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
-    Blog = require('./../models/blog');
+    Blog = require('./../models/blog'),
+    options = {};
+
 Router.get('/author/:author', function(req, res) {
     var author = req.params.author;
     Blog.getPostsByAuthor(author)
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            res.send(data);
+            if(options.viewBasePath) {
+                res.render(options.viewBasePath + 'author.html', data);
+            } else {
+                res.send(data);
+            }
         }, function fail(err) {
             res.send("Something went wrong")
         });
 });
-module.exports = Router;
+
+module.exports = function(opts) {
+    options = opts;
+    return Router;
+};

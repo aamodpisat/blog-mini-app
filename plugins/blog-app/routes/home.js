@@ -3,7 +3,8 @@
  */
 var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
-    Blog = require('./../models/blog');
+    Blog = require('./../models/blog'),
+    option = {};
 Router.get('/', function(req, res) {
     var skip = parseInt(req.query.skip) || 0;
     var limit= parseInt(req.query.limit) || 5;
@@ -15,9 +16,16 @@ Router.get('/', function(req, res) {
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            res.render('pages/blogs-app/home.html', data);
+            if(option.viewBasePath){
+                res.render(option.viewBasePath + 'home.html', data);
+            }else {
+                res.send(data);
+            }
         }, function fail(err) {
             res.send("Something went wrong");
         });
 });
-module.exports = Router;
+module.exports = function(opts) {
+    option = opts;
+    return Router;
+};

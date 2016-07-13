@@ -5,8 +5,9 @@
     <title></title>
 </head>
 <body>
-{% for post in posts %}
-<h1>{{post.title}}</h1>
-{% endfor %}
+    <h1>Home Template</h1>
+    {% for post in posts %}
+        <strong>Title :</strong> {{post.title}}<br>
+    {% endfor %}
 </body>
 </html>
