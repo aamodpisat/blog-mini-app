@@ -15,7 +15,6 @@ module.exports = exports = {
             'baseRoute':'/blog',
             'viewBasePath' : 'pages/blogs-app/'
         },
-        "posts":{}
     },
     "indexes": {
         "authors": ["title", "uid"],
