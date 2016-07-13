@@ -12,7 +12,8 @@ module.exports = exports = {
     ],
     plugins: {
         "blog-app" :{
-            'baseRoute':'/blog'
+            'baseRoute':'/blog',
+            'viewBasePath' : 'pages/blogs-app/'
         },
         "posts":{}
     },
