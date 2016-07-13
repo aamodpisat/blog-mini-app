@@ -5,7 +5,6 @@ var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
     Blog = require('./../models/blog'),
     options = {};
-
 Router.get('/author/:author', function(req, res) {
     var author = req.params.author;
     Blog.getPostsByAuthor(author)
@@ -21,7 +20,6 @@ Router.get('/author/:author', function(req, res) {
             res.send("Something went wrong")
         });
 });
-
 module.exports = function(opts) {
     options = opts;
     return Router;
