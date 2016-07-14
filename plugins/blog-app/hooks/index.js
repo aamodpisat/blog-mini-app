@@ -10,7 +10,7 @@ module.exports = function(app, baseRoute) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                req.getViewContext().set("categories", entries);
+                req.getViewContext().set("categoryAll", entries);
                 next();
             });
     });
@@ -21,7 +21,7 @@ module.exports = function(app, baseRoute) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                req.getViewContext().set("category", entries);
+                req.getViewContext().set("categoryBase", entries);
                 next();
             });
     });
@@ -43,7 +43,7 @@ module.exports = function(app, baseRoute) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                req.getViewContext().set("category", entries);
+                req.getViewContext().set("categoryAuthor", entries);
                 next();
             });
     });

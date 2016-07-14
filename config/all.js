@@ -4,17 +4,13 @@ module.exports = exports = {
         {
             "code": "en-us",
             "relative_url_prefix": "/"
-        },
-        {
-            "code": "ja-jp",
-            "relative_url_prefix": "/ja-JP/"
         }
     ],
     plugins: {
         "blog-app" :{
             'baseRoute':'/blog',
             'viewBasePath' : 'pages/blogs-app/'
-        },
+        }
     },
     "indexes": {
         "authors": ["title", "uid"],
