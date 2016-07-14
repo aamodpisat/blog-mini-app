@@ -15,7 +15,7 @@ Router.get('/', function(req, res, next) {
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            req.data = data || {};
+            req.contentstack.set('entry', data);
             next();
         }, function fail(err) {
             res.send("Something went wrong");
