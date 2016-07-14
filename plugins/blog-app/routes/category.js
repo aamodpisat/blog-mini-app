@@ -3,16 +3,15 @@
  */
 var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
-    _ = require('lodash'),
     Blog = require('./../models/blog');
-Router.get('/category/:category', function(req, res) {
+Router.get('/category/:category', function(req, res, next) {
     var category = req.params.category;
     Blog.getPostsByCategory(category)
         .spread(function success(entries) {
             var data= {};
             data['posts'] = entries;
-            _.merge(data, req.entry);
-            res.send(data);
+            req.data = data || {};
+            next();
         }, function fail(err) {
             res.send("Something went wrong")
         });

@@ -5,7 +5,8 @@
 /*!
  * Module dependencies
  */
-var contentstack =  require('contentstack-express');
+var contentstack =  require('contentstack-express'),
+    _ = require('lodash');
 module.exports = function BlogApp() {
     var options = BlogApp.options,
         baseRoute =  options.baseRoute || '/';
@@ -15,5 +16,10 @@ module.exports = function BlogApp() {
         app.use(baseRoute, require('./routes/category')); // Category route
         app.use(baseRoute, require('./routes/author')); // Author Route
         app.use(baseRoute, require('./routes/tag')); // Tag Route
+        app.use(function(req, res, next) {
+            var result = {};
+            result = _.merge(req.data, req.entry);
+            res.send(result);
+        });
     };
 };
