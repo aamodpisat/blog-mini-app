@@ -17,7 +17,7 @@ module.exports = function BlogApp() {
         app.use(baseRoute, require('./routes/category')); // Category route
         app.use(baseRoute, require('./routes/author')); // Author Route
         app.use(baseRoute, require('./routes/tag')); // Tag Route
-        app.use(function(req, res, next) {
+        app.extends().use(function(req, res, next) {
             var result = {};
             result = _.merge(req.contentstack.get('entry'), req.entry);
             if(viewBasePath && typeof viewBasePath == 'string') {
@@ -27,7 +27,7 @@ module.exports = function BlogApp() {
                     if (req.route.path == '/author/:author') res.render(viewBasePath + 'author.html', result);
                     if (req.route.path == '/tag/:tag') res.render(viewBasePath + 'tag.html', result);
                 } else {
-                    next();
+                    res.render(viewBasePath + 'post.html', {'post': req.contentstack.get('entry')});
                 }
             } else {
                 res.send(result);
