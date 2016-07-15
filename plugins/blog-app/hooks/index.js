@@ -10,7 +10,7 @@ module.exports = function(app, baseRoute) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                req.getViewContext().set("category", entries);
+                req.getViewContext().set("categories", entries);
                 next();
             });
     });
@@ -21,7 +21,7 @@ module.exports = function(app, baseRoute) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
-                req.getViewContext().set("category", entries);
+                req.getViewContext().set("categories", entries);
                 next();
             });
     });
