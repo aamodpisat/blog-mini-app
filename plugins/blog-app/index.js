@@ -20,7 +20,7 @@ module.exports = function BlogApp() {
         app.use(function(req, res, next) {
             var result = {};
             result = _.merge(req.contentstack.get('entry'), req.entry);
-            if(viewBasePath) {
+            if(viewBasePath && typeof viewBasePath == 'string') {
                 if(req.route.path == '/') res.render(viewBasePath + 'home.html', result);
                 if(req.route.path == '/category/:category') res.render(viewBasePath + 'category.html', result);
                 if(req.route.path == '/author/:author') res.render(viewBasePath + 'author.html', result);
