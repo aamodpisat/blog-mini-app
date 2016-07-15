@@ -22,12 +22,12 @@ module.exports = function BlogApp() {
             result = _.merge(req.contentstack.get('entry'), req.entry);
             if(viewBasePath && typeof viewBasePath == 'string') {
                 if(req.route) {
-                    if (req.route.path == '/')  res.render(viewBasePath + 'home.html', result);
-                    if (req.route.path == '/category/:category') res.render(viewBasePath + 'category.html', result);
-                    if (req.route.path == '/author/:author') res.render(viewBasePath + 'author.html', result);
-                    if (req.route.path == '/tag/:tag') res.render(viewBasePath + 'tag.html', result);
+                    if (req.route.path == '/')  res.render('pages/blog_landing_page/index.html', result);
+                    if (req.route.path == '/category/:category') res.render('pages/category/index.html', result);
+                    if (req.route.path == '/author/:author') res.render('pages/authors/index.html', result);
+                    //if (req.route.path == '/tag/:tag') res.render(viewBasePath + 'tag.html', result);
                 } else {
-                    res.render(viewBasePath + 'post.html', {'post': req.contentstack.get('entry')});
+                   next();
                 }
             } else {
                 res.send(result);
