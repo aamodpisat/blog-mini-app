@@ -21,10 +21,14 @@ module.exports = function BlogApp() {
             var result = {};
             result = _.merge(req.contentstack.get('entry'), req.entry);
             if(viewBasePath && typeof viewBasePath == 'string') {
-                if(req.route.path == '/') res.render(viewBasePath + 'home.html', result);
-                if(req.route.path == '/category/:category') res.render(viewBasePath + 'category.html', result);
-                if(req.route.path == '/author/:author') res.render(viewBasePath + 'author.html', result);
-                if(req.route.path == '/tag/:tag') res.render(viewBasePath + 'tag.html', result);
+                if(req.route) {
+                    if (req.route.path == '/')  res.render(viewBasePath + 'home.html', result);
+                    if (req.route.path == '/category/:category') res.render(viewBasePath + 'category.html', result);
+                    if (req.route.path == '/author/:author') res.render(viewBasePath + 'author.html', result);
+                    if (req.route.path == '/tag/:tag') res.render(viewBasePath + 'tag.html', result);
+                } else {
+                    next();
+                }
             } else {
                 res.send(result);
             }
