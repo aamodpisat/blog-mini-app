@@ -8,8 +8,7 @@ module.exports = exports = {
     ],
     plugins: {
         "blog-app" :{
-            'baseRoute':'/blog',
-            'viewBasePath' : 'pages/blogs-app/'
+            'baseRoute':'/blog'
         }
     },
     "indexes": {

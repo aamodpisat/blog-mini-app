@@ -9,8 +9,7 @@ var contentstack =  require('contentstack-express'),
     _ = require('lodash');
 module.exports = function BlogApp() {
     var options = BlogApp.options,
-        baseRoute =  options.baseRoute || '/',
-        viewBasePath = options.viewBasePath;
+        baseRoute =  options.baseRoute || '/';
     BlogApp.serverExtends = function(app) {
         require('./hooks/index')(app, baseRoute); //Hooks
         app.use(baseRoute, require('./routes/home')); // Home Route
@@ -20,7 +19,6 @@ module.exports = function BlogApp() {
         app.extends().use(function(req, res, next) {
             var result = {};
             result = _.merge(req.contentstack.get('entry'), req.entry);
-            if(viewBasePath && typeof viewBasePath == 'string') {
                 if(req.route) {
                     if (req.route.path == '/')  res.render('pages/blog_landing_page/index.html', result);
                     if (req.route.path == '/category/:category') res.render('pages/category/index.html', result);
@@ -28,9 +26,6 @@ module.exports = function BlogApp() {
                 } else {
                    next();
                 }
-            } else {
-                res.send(result);
-            }
         });
     };
 };
