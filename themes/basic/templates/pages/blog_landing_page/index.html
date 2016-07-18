@@ -24,6 +24,10 @@
 					</div>
 					{% endfor %}
 					<div style="clear: both;">&nbsp;</div>
+					<a href="{{next()}}" >Next</a>
+					{% if previous() %}
+					<a href="{{previous()}}" >Previous</a>
+					{% endif %}
 				</div>
 				<!-- end #content -->
 				{% include "partials/sidebar.html" %}
