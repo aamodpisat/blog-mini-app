@@ -3,7 +3,7 @@
  */
 module.exports = function (app) {
     app.use(function(req, res, next) {
-        app.locals.next = function () {
+        app.locals.next = function() {
             var skip, limit;
             if(req.query.skip && req.query.limit) {
                 skip = parseInt(req.query.skip) + parseInt(req.query.limit);
@@ -14,7 +14,7 @@ module.exports = function (app) {
                 return '?skip=' + limit + '&limit=' + limit ;
             }
         };
-        app.locals.previous = function () {
+        app.locals.previous = function() {
             if(req.query.skip && req.query.limit) {
                 var skip = parseInt(req.query.skip) - parseInt(req.query.limit),
                     limit = parseInt(req.query.limit);
