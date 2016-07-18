@@ -12,6 +12,7 @@ module.exports = function BlogApp() {
         baseRoute =  options.baseRoute || '/';
     BlogApp.serverExtends = function(app) {
         require('./hooks/index')(app, baseRoute); //Hooks
+        require('./helpers/index')(app); //Hooks
         app.use(baseRoute, require('./routes/home')); // Home Route
         app.use(baseRoute, require('./routes/category')); // Category route
         app.use(baseRoute, require('./routes/author')); // Author Route
