@@ -6,9 +6,9 @@ module.exports = function (app, baseRoute) {
         app.locals.next = function() {
             var skip, limit;
             if(req.query.skip || req.query.limit) {
-                var _skip = parseInt(req.query.skip) || 0;
+                var skipInt = parseInt(req.query.skip) || 0;
                 limit = parseInt(req.query.limit) || 5;
-                skip = _skip + limit;
+                skip = skipInt + limit;
                 return '?skip=' + skip + '&limit=' + limit;
             } else {
                 limit = 5;
