@@ -25,7 +25,6 @@ module.exports = function BlogApp() {
                     if (req.route.path == '/')  res.render('pages/blog_landing_page/index.html', result);
                     if (req.route.path == '/category/:category') res.render('pages/category/index.html', result);
                     if (req.route.path == '/author/:author') res.render('pages/authors/index.html', result);
-                    //if (req.route.path == '/tag/:tag') res.render(viewBasePath + 'tag.html', result);
                 } else {
                    next();
                 }
