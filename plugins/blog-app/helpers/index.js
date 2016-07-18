@@ -1,13 +1,14 @@
 /**
  * Created by Aamod Pisat on 04-07-2016.
  */
-module.exports = function (app) {
+module.exports = function (app, baseRoute) {
     app.use(function(req, res, next) {
         app.locals.next = function() {
             var skip, limit;
-            if(req.query.skip && req.query.limit) {
-                skip = parseInt(req.query.skip) + parseInt(req.query.limit);
-                limit = parseInt(req.query.limit);
+            if(req.query.skip || req.query.limit) {
+                var _skip = parseInt(req.query.skip) || 0;
+                limit = parseInt(req.query.limit) || 5;
+                skip = _skip + limit;
                 return '?skip=' + skip + '&limit=' + limit;
             } else {
                 limit = 5;
@@ -15,10 +16,14 @@ module.exports = function (app) {
             }
         };
         app.locals.previous = function() {
-            if(req.query.skip && req.query.limit) {
+            if(req.query.skip || req.query.limit) {
                 var skip = parseInt(req.query.skip) - parseInt(req.query.limit),
                     limit = parseInt(req.query.limit);
-                return '?skip=' + skip + '&limit=' + limit;
+                if(skip <= 0 ) {
+                    return baseRoute;
+                } else {
+                    return '?skip=' + skip + '&limit=' + limit;
+                }
             } else {
                 return false;
             }
