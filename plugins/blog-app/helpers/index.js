@@ -41,17 +41,23 @@ module.exports = function (app, baseRoute) {
                 }
             }
         };
+        app.locals.next_url = pagination.nextUrl();
+        app.locals.prev_url = pagination.prevUrl();
+        app.locals.page = pagination.currentPage();
         /*
          * To get total number of pages;
          */
         var options ={};
+
         Blog.getRecentPosts(options)
-            .spread(function success(entry, count) {
+            .spread(function success(entries, count) {
                 app.locals.pages =  Math.ceil(count / 5);
+                next();
             });
-        app.locals.next_url = pagination.nextUrl();
-        app.locals.prev_url = pagination.prevUrl();
-        app.locals.page = pagination.currentPage();
+
+    });
+    app.error(function(err, req, res, next) {
+        console.log("error---", err.stack);
         next();
     });
 };

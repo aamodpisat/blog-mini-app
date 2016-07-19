@@ -17,5 +17,8 @@
     {% endif %}
     {{entry.full_description}}
 
+    <a href="{{prev_post.url}}" class="previous">{{prev_post.title}}</a>
+    <a href="{{next_post.url}}" class="next">{{next_post.title}}</a>
+
 </section>
 {% endblock %}

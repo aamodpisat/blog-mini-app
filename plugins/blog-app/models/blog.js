@@ -23,6 +23,22 @@ var Stack = contentstack.Stack();
              .toJSON()
              .find()
      },
+     getNextPost: function(createdValue) {
+         var postsQuery = this._getPosts();
+         return postsQuery
+             .descending('created_at')
+             .lessThan('created_at', createdValue)
+             .toJSON()
+             .find()
+     },
+     getPreviousPost: function(createdValue) {
+         var postsQuery = this._getPosts();
+         return postsQuery
+             .ascending('created_at')
+             .greaterThan('created_at', createdValue)
+             .toJSON()
+             .find()
+     },
      /*
       * To get the list of posts by Category
       */

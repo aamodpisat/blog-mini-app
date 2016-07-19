@@ -6,6 +6,7 @@
  * Module dependencies
  */
 var contentstack =  require('contentstack-express'),
+    Blog = require('./models/blog'),
     _ = require('lodash');
 module.exports = function BlogApp() {
     var options = BlogApp.options,
@@ -25,8 +26,39 @@ module.exports = function BlogApp() {
                     if (req.route.path == '/category/:category') res.render('pages/category/index.html', result);
                     if (req.route.path == '/author/:author') res.render('pages/authors/index.html', result);
                 } else {
-                   next();
+                    next();
                 }
+        });
+        app.extends().use('/blog/*', function(req, res, next) {
+            var entry =  req.contentstack.get('entry');
+            if(entry){
+                Blog.getNextPost(entry.created_at)
+                    .spread(function success(nextEntry) {
+                        if(nextEntry[0]) {
+                            var next_post = {
+                                'title': nextEntry[0].title,
+                                'url': nextEntry[0].url
+                            };
+                            req.getViewContext().set('next_post', next_post);
+                        }
+                        Blog.getPreviousPost(entry.created_at)
+                            .spread(function success(prevEntry) {
+                                if(prevEntry[0]) {
+                                    var prev_post = {
+                                            'title': prevEntry[0].title,
+                                            'url': prevEntry[0].url
+                                        };
+                                    //console.log("previous post", prev_post);
+                                    req.getViewContext().set('prev_post', prev_post);
+                                    next();
+                                } else {
+                                    next();
+                                }
+                            });
+                    });
+            } else {
+                console.log("Some error");
+            }
         });
     };
 };
