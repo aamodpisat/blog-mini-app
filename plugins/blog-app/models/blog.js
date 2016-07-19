@@ -17,6 +17,7 @@ var Stack = contentstack.Stack();
          var postsQuery = this._getPosts();
          return postsQuery
              .descending('created_at')
+             .includeCount()
              .skip(skip)
              .limit(limit)
              .toJSON()

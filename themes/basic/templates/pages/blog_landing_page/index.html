@@ -1,6 +1,7 @@
 {% extends "layouts/default.html" %}
 {% block content %}
 <section>
+
 	<div id="page">
 		<div id="page-bgtop">
 			<div id="page-bgbtm">
@@ -24,10 +25,15 @@
 					</div>
 					{% endfor %}
 					<div style="clear: both;">&nbsp;</div>
-					<a href="{{next()}}" >Next</a>
-					{% if previous() %}
-					<a href="{{previous()}}" >Previous</a>
-					{% endif %}
+					<nav class="pagination" role="navigation">
+						{% if prev_url %}
+						<a class="newer-posts" href="{{prev_url}}">&larr; Newer Posts</a>
+						{% endif %}
+						<span class="page-number">Page {{page}} of {{pages}}</span>
+						{% if next_url and page != pages %}
+						<a class="older-posts" href="{{next_url}}">Older Posts &rarr;</a>
+						{% endif %}
+					</nav>
 				</div>
 				<!-- end #content -->
 				{% include "partials/sidebar.html" %}
