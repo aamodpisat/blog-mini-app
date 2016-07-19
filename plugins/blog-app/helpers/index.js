@@ -56,8 +56,4 @@ module.exports = function (app, baseRoute) {
             });
 
     });
-    app.error(function(err, req, res, next) {
-        console.log("error---", err.stack);
-        next();
-    });
 };
