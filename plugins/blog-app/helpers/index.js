@@ -16,30 +16,17 @@ module.exports = function (app, baseRoute) {
          */
         var pagination = {
             'nextUrl' : function() {
-              var skip, limit;
-              if(req.query.page) {
-                  return '?page=' + (page + 1);
-              } else {
-                  return '?page=' + 2;
-              }
+                return (req.query.page) ? '?page=' + (page + 1) : '?page=' + 2;
             },
             'prevUrl': function() {
                 if(req.query.page) {
-                    if(req.query.page <= 2 ) {
-                        return baseRoute;
-                    } else {
-                        return '?page=' + (page - 1);
-                    }
+                    return (req.query.page <= 2 ) ? baseRoute : '?page=' + (page - 1);
                 } else {
                     return false;
                 }
             },
             'currentPage': function() {
-                if(req.query.page) {
-                    return page;
-                } else {
-                    return 1;
-                }
+                return (req.query.page) ? page: 1;
             }
         };
         app.locals.next_url = pagination.nextUrl();
