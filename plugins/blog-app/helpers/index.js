@@ -3,7 +3,7 @@
  */
 var Blog = require('./../models/blog');
 module.exports = function (app, baseRoute) {
-    app.extends().use(function(req, res, next) {
+    app.use(function(req, res, next) {
         /*
          * Pagination
          */
