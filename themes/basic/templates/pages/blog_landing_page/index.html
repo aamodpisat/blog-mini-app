@@ -1,31 +1,15 @@
 {% extends "layouts/default.html" %}
+
 {% block content %}
 <section>
-
 	<div id="page">
 		<div id="page-bgtop">
 			<div id="page-bgbtm">
-				<div id="content">
-					{% for post in posts %}
-					<div class="post">
-						<div class="post-wrap">
-							<h2 class="title">
-								<a href="{{post.url}}">{{post.title}}</a>
-							</h2>
-							<p class="meta">Posted by <a href="/blog/author/{{post.author[0].title}}">{{post.author[0].title}}</a> </p>
-							{% if post.tags.length > 0 %}
-							<p class="meta">Tags:
-								{% for tag in post.tags %}
-								<a href="/blog/tag/{{tag}}">{{tag}}</a> ,
-								{% endfor %}
-							</p>
-							{% endif %}
-							<div class="entry">{{post.summary}}</div>
-						</div>
-					</div>
-					{% endfor %}
-					<div style="clear: both;">&nbsp;</div>
-					<nav class="pagination" role="navigation">
+				<!--Posts Template-->
+				{% include "partials/posts.html" %}
+				<!-- Pagination -->
+				<div class="pagination">
+					<nav role="navigation">
 						{% if prev_url %}
 						<a class="newer-posts" href="{{prev_url}}">&larr; Newer Posts</a>
 						{% endif %}
@@ -35,14 +19,12 @@
 						{% endif %}
 					</nav>
 				</div>
-				<!-- end #content -->
+				<!--Widget Template-->
 				{% include "partials/sidebar.html" %}
 				<div style="clear: both;">&nbsp;</div>
+
 			</div>
 		</div>
-		{% if maindata.error %}
-		<h2>{{maindata.error}}</h2>
-		{% endif %}
 	</div>
 </section>
 {% endblock %}

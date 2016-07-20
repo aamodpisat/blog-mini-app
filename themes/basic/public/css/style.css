@@ -222,6 +222,7 @@ img.aligncenter {
 #page-bgbtm {
     margin: 0px;
     padding: 40px 30px 0px 30px;
+    position: relative;
 }
 
 /* Content */
@@ -356,7 +357,12 @@ img.aligncenter {
 #sidebar a:hover {
     text-decoration: underline;
 }
-
+/*Pagination*/
+.pagination {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+}
 /* Calendar */
 
 #calendar {

@@ -3,7 +3,7 @@
  */
 var Blog = require('./../models/blog');
 module.exports = function (app, baseRoute) {
-    app.use(function(req, res, next) {
+    app.extends().use(function(req, res, next) {
         /*
          * Pagination
          */
@@ -48,7 +48,6 @@ module.exports = function (app, baseRoute) {
          * To get total number of pages;
          */
         var options ={};
-
         Blog.getRecentPosts(options)
             .spread(function success(entries, count) {
                 app.locals.pages =  Math.ceil(count / 5);
