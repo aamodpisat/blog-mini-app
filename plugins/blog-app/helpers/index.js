@@ -5,12 +5,7 @@ var Blog = require('./../models/blog');
 module.exports = function (app, baseRoute) {
     app.use(function(req, res, next) {
         var page = parseInt(req.query.page);
-        if(page) {
-            req.options = {
-                'skip':  parseInt(req.query.page) * 5 - 5,
-                'limit': 5
-            };
-        }
+        req.skip = (page) ? (page * 5) - 5 : 0;
         /*
          * Pagination
          */
