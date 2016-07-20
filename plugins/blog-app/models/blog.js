@@ -23,7 +23,7 @@ var Stack = contentstack.Stack();
              .toJSON()
              .find()
      },
-     getNextPost: function(createdDateValue) {
+     getNextPost: function (createdDateValue) {
          var postsQuery = this._getPosts();
          return postsQuery
              .descending('created_at')
@@ -31,7 +31,7 @@ var Stack = contentstack.Stack();
              .toJSON()
              .find()
      },
-     getPreviousPost: function(createdDateValue) {
+     getPreviousPost: function (createdDateValue) {
          var postsQuery = this._getPosts();
          return postsQuery
              .ascending('created_at')
