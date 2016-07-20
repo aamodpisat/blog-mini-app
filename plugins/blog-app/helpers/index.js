@@ -4,38 +4,39 @@
 var Blog = require('./../models/blog');
 module.exports = function (app, baseRoute) {
     app.use(function(req, res, next) {
+        var page = parseInt(req.query.page);
+        if(page) {
+            req.options = {
+                'skip':  parseInt(req.query.page) * 5 - 5,
+                'limit': 5
+            };
+        }
         /*
          * Pagination
          */
         var pagination = {
             'nextUrl' : function() {
               var skip, limit;
-              if(req.query.skip || req.query.limit) {
-                  var skipInt = parseInt(req.query.skip) || 0;
-                  limit = parseInt(req.query.limit) || 5;
-                  skip = skipInt + limit;
-                  return '?skip=' + skip;
+              if(req.query.page) {
+                  return '?page=' + (page + 1);
               } else {
-                  limit = 5;
-                  return '?skip=' + limit;
+                  return '?page=' + 2;
               }
             },
             'prevUrl': function() {
-                if(req.query.skip || req.query.limit) {
-                    var limit = parseInt(req.query.limit) || 5;
-                    var skip = parseInt(req.query.skip) - limit;
-                    if(skip <= 0 ) {
+                if(req.query.page) {
+                    if(req.query.page <= 2 ) {
                         return baseRoute;
                     } else {
-                        return '?skip=' + skip;
+                        return '?page=' + (page - 1);
                     }
                 } else {
                     return false;
                 }
             },
             'currentPage': function() {
-                if(req.query.skip) {
-                    return (req.query.skip / 5) + 1;
+                if(req.query.page) {
+                    return page;
                 } else {
                     return 1;
                 }
@@ -53,6 +54,5 @@ module.exports = function (app, baseRoute) {
                 app.locals.pages =  Math.ceil(count / 5);
                 next();
             });
-
     });
 };

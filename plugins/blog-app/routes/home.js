@@ -5,8 +5,11 @@ var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
     Blog = require('./../models/blog');
 Router.get('/', function(req, res, next) {
-    var skip = parseInt(req.query.skip) || 0;
-    var limit= parseInt(req.query.limit) || 5;
+    var skip = 0;
+    var limit= 5;
+    if(req.options) {
+        skip = req.options.skip;
+    }
     var options = {
        'skip' : skip,
        'limit': limit
