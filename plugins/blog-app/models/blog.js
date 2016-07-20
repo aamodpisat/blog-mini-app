@@ -23,6 +23,9 @@ var Stack = contentstack.Stack();
              .toJSON()
              .find()
      },
+     /*
+      * To get the next post
+      */
      getNextPost: function (entryDateValue) {
          var postsQuery = this._getPosts();
          return postsQuery
@@ -31,6 +34,9 @@ var Stack = contentstack.Stack();
              .toJSON()
              .find()
      },
+     /*
+      * To get the previous post
+      */
      getPreviousPost: function (entryDateValue) {
          var postsQuery = this._getPosts();
          return postsQuery
