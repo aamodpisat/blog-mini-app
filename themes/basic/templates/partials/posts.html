@@ -6,8 +6,12 @@
             <h2 class="title">
                 <a href="{{post.url}}">{{post.title}}</a>
             </h2>
-            <p class="meta">Posted by <a href="/blog/author/{{post.author[0].title}}">{{post.author[0]
-                                .title}}</a>
+            <p class="meta">
+                Posted by
+                <a href="/blog/author/{{post.author[0].title}}">
+                    {{post.author[0].title}}
+                </a>
+                Posted on: <b>{{post.created_at}}</b>
             </p>
             {% if post.tags.length > 0 %}
             <p class="meta">Tags:
