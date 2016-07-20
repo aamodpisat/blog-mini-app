@@ -6,8 +6,9 @@ var contentstack = require('contentstack-express'),
     Blog = require('./../models/blog');
 Router.get('/author/:author', function(req, res, next) {
     var author = req.params.author;
-    Blog.getPostsByAuthor(author)
-        .spread(function success(entries) {
+    Blog.getPostsByAuthor(author, req.options)
+        .spread(function success(entries, count) {
+            req.pages =  Math.ceil(count / req.limit);
             var data= {};
             data['posts'] = entries;
             req.contentstack.set('entry', data);

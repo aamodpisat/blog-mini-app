@@ -19,6 +19,7 @@ module.exports = function BlogApp() {
         app.use(baseRoute, require('./routes/author')); // Author Route
         app.use(baseRoute, require('./routes/tag')); // Tag Route
         app.extends().use(function(req, res, next) {
+            app.locals.pages = req.pages;
             var result = {};
             result = _.merge(req.contentstack.get('entry'), req.entry);
                 if(req.route) {
@@ -57,7 +58,7 @@ module.exports = function BlogApp() {
                             });
                     });
             } else {
-                console.log("Some error");
+                res.render('pages/404.html');
             }
         });
     };

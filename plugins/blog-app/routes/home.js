@@ -5,14 +5,9 @@ var contentstack = require('contentstack-express'),
     Router = contentstack.Router(),
     Blog = require('./../models/blog');
 Router.get('/', function(req, res, next) {
-    var skip = (req.skip) ? req.skip : 0 ;
-    var limit= 5;
-    var options = {
-       'skip' : skip,
-       'limit': limit
-   };
-    Blog.getRecentPosts(options)
-        .spread(function success(entries) {
+    Blog.getRecentPosts(req.options)
+        .spread(function success(entries, count) {
+            req.pages =  Math.ceil(count / req.limit);
             var data= {};
             data['posts'] = entries;
             req.contentstack.set('entry', data);

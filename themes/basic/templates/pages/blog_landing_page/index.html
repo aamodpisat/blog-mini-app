@@ -7,18 +7,7 @@
 			<div id="page-bgbtm">
 				<!--Posts Template-->
 				{% include "partials/posts.html" %}
-				<!-- Pagination -->
-				<div class="pagination">
-					<nav role="navigation">
-						{% if prev_url %}
-						<a class="newer-posts" href="{{prev_url}}">&larr; Newer Posts</a>
-						{% endif %}
-						<span class="page-number">Page {{page}} of {{pages}}</span>
-						{% if next_url and page != pages %}
-						<a class="older-posts" href="{{next_url}}">Older Posts &rarr;</a>
-						{% endif %}
-					</nav>
-				</div>
+
 				<!--Widget Template-->
 				{% include "partials/sidebar.html" %}
 				<div style="clear: both;">&nbsp;</div>

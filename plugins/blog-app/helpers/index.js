@@ -1,11 +1,17 @@
 /**
  * Created by Aamod Pisat on 04-07-2016.
  */
-var Blog = require('./../models/blog');
+var Blog = require('./../models/blog'),
+    moment = require('moment');
 module.exports = function (app, baseRoute) {
     app.use(function(req, res, next) {
+        var limit= req.limit = 2;
         var page = parseInt(req.query.page);
-        req.skip = (page) ? (page * 5) - 5 : 0;
+        var skip = (page) ? (page * limit) - limit : 0;
+        req.options = {
+            'skip' : skip ,
+            'limit': limit
+        };
         /*
          * Pagination
          */
@@ -14,8 +20,8 @@ module.exports = function (app, baseRoute) {
                 return (req.query.page) ? '?page=' + (page + 1) : '?page=' + 2;
             },
             'prevUrl': function() {
-                if(req.query.page) {
-                    return (req.query.page <= 2 ) ? baseRoute : '?page=' + (page - 1);
+                if(req.query.page && req.query.page >= 2) {
+                    return '?page=' + (page - 1);
                 } else {
                     return false;
                 }
@@ -27,14 +33,13 @@ module.exports = function (app, baseRoute) {
         app.locals.next_url = pagination.nextUrl();
         app.locals.prev_url = pagination.prevUrl();
         app.locals.page = pagination.currentPage();
-        /*
-         * To get total number of pages;
-         */
-        var options ={};
-        Blog.getRecentPosts(options)
-            .spread(function success(entries, count) {
-                app.locals.pages =  Math.ceil(count / 5);
-                next();
-            });
+        app.locals.date= function(value) {
+            console.log("Date---", value);
+            var day= moment(value)._d;
+            console.log("day---", day);
+            return day;
+        };
+        //app.locals.date = moment("12-25-1995", "MM-DD-YYYY");
+        next();
     });
 };

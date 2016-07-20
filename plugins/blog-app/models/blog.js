@@ -48,20 +48,30 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of posts by Category
       */
-     getPostsByCategory : function (category) {
-          var postsQuery = this._getPosts();
-          return postsQuery
-              .where("category.title", category)
-              .toJSON()
-              .find()
+     getPostsByCategory : function (category, options) {
+         var skip = options.skip || 0,
+             limit = options.limit || 5;
+         var postsQuery = this._getPosts();
+         return postsQuery
+             .where("category.title", category)
+             .includeCount()
+             .skip(skip)
+             .limit(limit)
+             .toJSON()
+             .find()
      },
      /*
       * To get the list of posts by Author
       */
-     getPostsByAuthor : function (author) {
+     getPostsByAuthor : function (author, options) {
+         var skip = options.skip || 0,
+             limit = options.limit || 5;
          var postsQuery = this._getPosts();
          return postsQuery
              .where("author.title", author)
+             .includeCount()
+             .skip(skip)
+             .limit(limit)
              .toJSON()
              .find()
      },

@@ -11,7 +11,7 @@
                 <a href="/blog/author/{{post.author[0].title}}">
                     {{post.author[0].title}}
                 </a>
-                Posted on: <b>{{post.created_at}}</b>
+                Posted on: <b>{{date(post.created_at)}}</b>
             </p>
             {% if post.tags.length > 0 %}
             <p class="meta">Tags:
@@ -23,6 +23,18 @@
             </p>
             {% endif %}
             <div class="entry">{{post.summary}}</div>
+        </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <nav role="navigation">
+                {% if prev_url %}
+                <a class="newer-posts" href="{{prev_url}}">&larr; Newer Posts</a>
+                {% endif %}
+                <span class="page-number">Page {{page}} of {{pages}}</span>
+                {% if next_url and page != pages %}
+                <a class="older-posts" href="{{next_url}}">Older Posts &rarr;</a>
+                {% endif %}
+            </nav>
         </div>
     </div>
     {% endfor %}
