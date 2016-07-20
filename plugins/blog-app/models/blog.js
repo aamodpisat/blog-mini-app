@@ -23,19 +23,19 @@ var Stack = contentstack.Stack();
              .toJSON()
              .find()
      },
-     getNextPost: function (createdDateValue) {
+     getNextPost: function (entryDateValue) {
          var postsQuery = this._getPosts();
          return postsQuery
              .descending('created_at')
-             .lessThan('created_at', createdDateValue)
+             .lessThan('created_at', entryDateValue)
              .toJSON()
              .find()
      },
-     getPreviousPost: function (createdDateValue) {
+     getPreviousPost: function (entryDateValue) {
          var postsQuery = this._getPosts();
          return postsQuery
              .ascending('created_at')
-             .greaterThan('created_at', createdDateValue)
+             .greaterThan('created_at', entryDateValue)
              .toJSON()
              .find()
      },
