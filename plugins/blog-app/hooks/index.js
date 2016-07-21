@@ -17,7 +17,7 @@ module.exports = function(app, baseRoute) {
     /*
      * To add data model to your Homepage route
      */
-    app.use(baseRoute, function(req, res, next) {
+    app.get(baseRoute, function(req, res, next) {
         var options = {};
         Blog.getCategories(options)
             .spread(function success(entries) {
