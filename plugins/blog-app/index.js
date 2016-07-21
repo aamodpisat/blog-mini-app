@@ -38,7 +38,8 @@ module.exports = function BlogApp() {
                         if(nextEntry[0]) {
                             var next_post = {
                                 'title': nextEntry[0].title,
-                                'url': nextEntry[0].url
+                                'url': nextEntry[0].url,
+                                'summary': nextEntry[0].summary
                             };
                             req.getViewContext().set('next_post', next_post);
                         }
@@ -47,7 +48,8 @@ module.exports = function BlogApp() {
                                 if(prevEntry[0]) {
                                     var prev_post = {
                                             'title': prevEntry[0].title,
-                                            'url': prevEntry[0].url
+                                            'url': prevEntry[0].url,
+                                            'summary': nextEntry[0].summary
                                         };
                                     req.getViewContext().set('prev_post', prev_post);
                                     next();

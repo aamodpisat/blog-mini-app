@@ -1,19 +1,9 @@
 {% extends "layouts/default.html" %}
 
 {% block content %}
-<section>
-	<div id="page">
-		<div id="page-bgtop">
-			<div id="page-bgbtm">
-				<!--Posts Template-->
-				{% include "partials/posts.html" %}
 
-				<!--Widget Template-->
-				{% include "partials/sidebar.html" %}
-				<div style="clear: both;">&nbsp;</div>
+<!--Posts Template-->
+{% include "partials/posts.html" %}
+<div id="body-class" style="display: none;" class="home-template"></div>
 
-			</div>
-		</div>
-	</div>
-</section>
 {% endblock %}
