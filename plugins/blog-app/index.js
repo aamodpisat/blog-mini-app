@@ -13,7 +13,7 @@ module.exports = function BlogApp() {
         baseRoute =  options.baseRoute || '/';
     BlogApp.serverExtends = function(app) {
         require('./hooks/index')(app, baseRoute); //Hooks
-        require('./helpers/index')(app, baseRoute); //Helper
+        require('./helpers/index')(app); //Helper
         app.use(baseRoute, require('./routes/home')); // Home Route
         app.use(baseRoute, require('./routes/category')); // Category route
         app.use(baseRoute, require('./routes/author')); // Author Route
@@ -49,7 +49,6 @@ module.exports = function BlogApp() {
                                             'title': prevEntry[0].title,
                                             'url': prevEntry[0].url
                                         };
-                                    //console.log("previous post", prev_post);
                                     req.getViewContext().set('prev_post', prev_post);
                                     next();
                                 } else {

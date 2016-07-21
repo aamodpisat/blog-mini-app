@@ -3,7 +3,7 @@
  */
 var Blog = require('./../models/blog'),
     moment = require('moment');
-module.exports = function (app, baseRoute) {
+module.exports = function (app) {
     app.use(function(req, res, next) {
         var limit= req.limit = 2;
         var page = parseInt(req.query.page);
@@ -34,12 +34,8 @@ module.exports = function (app, baseRoute) {
         app.locals.prev_url = pagination.prevUrl();
         app.locals.page = pagination.currentPage();
         app.locals.date= function(value) {
-            console.log("Date---", value);
-            var day= moment(value)._d;
-            console.log("day---", day);
-            return day;
+            return moment(value)._d;
         };
-        //app.locals.date = moment("12-25-1995", "MM-DD-YYYY");
         next();
     });
 };
