@@ -9,8 +9,9 @@
                     <span class="post-meta">
                         <a href="/blog/author/{{post.author[0].title}}">
                             {{post.author[0].title}}
-                        </a> on
+                        </a>
                          {% if post.tags.length > 0 %}
+                            on
                         {% for tag in post.tags %}
                              {{tag}},
                          {% endfor %}
@@ -26,17 +27,19 @@
         {% endfor %}
         <nav class="pagination" role="pagination">
             <div class="inner">
-                {% if prev_url %}
-                <a class="pagination-next" href="{{prev_url}}"><i class="ic ic-arrow-left"></i><span class="pagination-label">Newer Posts</span></a>
+                {% if prev_page_url %}
+                <a class="pagination-next" href="{{prev_page_url}}"><i class="ic ic-arrow-left"></i><span
+                        class="pagination-label">Newer Posts</span></a>
                 {% endif %}
                 <span class="pagination-info">Page {{page}} of {{pages}}</span>
-                {% if next_url and page != pages %}
-                <a class="pagination-prev" href="{{next_url}}"><span class="pagination-label">Older Posts</span> <i class="ic ic-arrow-right"></i></a>
+                {% if next_page_url and page != pages %}
+                <a class="pagination-prev" href="{{next_page_url}}"><span class="pagination-label">Older Posts</span>
+                    <i class="ic ic-arrow-right"></i></a>
                 {% endif %}
                 <div class="clear"></div>
             </div>
         </nav>
     </main>
 </div>
-
-
+{% getCategories "/categories" %}
+{% endgetCategories %}

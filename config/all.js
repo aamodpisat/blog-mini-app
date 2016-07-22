@@ -4,6 +4,10 @@ module.exports = exports = {
         {
             "code": "en-us",
             "relative_url_prefix": "/"
+        },
+        {
+            "code": "ja-jp",
+            "relative_url_prefix": "/ja-JP/"
         }
     ],
     plugins: {

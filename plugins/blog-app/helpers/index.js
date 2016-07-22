@@ -30,8 +30,8 @@ module.exports = function (app) {
                 return (req.query.page) ? page: 1;
             }
         };
-        app.locals.next_url = pagination.nextUrl();
-        app.locals.prev_url = pagination.prevUrl();
+        app.locals.next_page_url = pagination.nextUrl();
+        app.locals.prev_page_url = pagination.prevUrl();
         app.locals.page = pagination.currentPage();
         app.locals.date= function(value) {
             return moment(value).format('Do MMMM YYYY');
