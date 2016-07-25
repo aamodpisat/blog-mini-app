@@ -6,8 +6,9 @@ var contentstack = require('contentstack-express'),
     Blog = require('./../models/blog');
 Router.get('/tag/:tag', function(req, res, next) {
     var tag = req.params.tag;
-    Blog.getPostsByTag(tag)
-        .spread(function success(entries) {
+    Blog.getPostsByTag(tag, req.options)
+        .spread(function success(entries, count) {
+            req.pages =  Math.ceil(count / req.limit);
             var data= {};
             data['posts'] = entries;
             req.contentstack.set('entry', data);

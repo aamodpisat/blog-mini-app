@@ -78,10 +78,15 @@ var Stack = contentstack.Stack();
      /*
       * To get the list of posts by Tag
       */
-     getPostsByTag : function (tag) {
+     getPostsByTag : function (tag, options) {
+         var skip = options.skip || 0,
+             limit = options.limit || 5;
          var postsQuery = this._getPosts();
          return postsQuery
              .where("tags", tag)
+             .includeCount()
+             .skip(skip)
+             .limit(limit)
              .toJSON()
              .find()
      },
