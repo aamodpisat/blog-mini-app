@@ -11,6 +11,7 @@ Router.get('/author/:author', function(req, res, next) {
             req.pages =  Math.ceil(count / req.limit);
             var data= {};
             data['posts'] = entries;
+            data['author'] = entries[0].author[0];
             req.contentstack.set('entry', data);
             next();
         }, function fail(err) {

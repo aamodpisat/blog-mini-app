@@ -11,6 +11,12 @@ Router.get('/category/:category', function(req, res, next) {
             req.pages =  Math.ceil(count / req.limit);
             var data= {};
             data['posts'] = entries;
+            for(var i =0; i < entries[0].category.length; i++) {
+                if(entries[0].category[i].title == category) {
+                    data['category'] = entries[0].category[i];
+                    break;
+                }
+            }
             req.contentstack.set('entry', data);
             next();
         }, function fail(err) {
