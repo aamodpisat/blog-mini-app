@@ -12,7 +12,7 @@ module.exports = function(app, baseRoute) {
             .spread(function success(entries) {
                 req.getViewContext().set("categories", entries);
                 next();
-            });0
+            });
     });
     /*
      * To add data model to your Homepage route
