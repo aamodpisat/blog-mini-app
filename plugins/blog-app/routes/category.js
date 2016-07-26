@@ -12,7 +12,7 @@ Router.get('/category/:category', function(req, res, next) {
             req.pages =  Math.ceil(count / req.limit);
             var data= {};
             data['posts'] = entries;
-            data['category']  = entries[0].category[_.findIndex( entries[0].category, ['title', category])];
+            data['category']  = entries[0].category[_.findIndex(entries[0].category, ['title', category])];
             req.contentstack.set('entry', data);
             next();
         }, function fail(err) {
