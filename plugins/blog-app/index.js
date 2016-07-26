@@ -64,33 +64,4 @@ module.exports = function BlogApp() {
             }
         });
     };
-    BlogApp.templateExtends = function(engine) {
-        var env = engine.getEnvironment();
-        env.addFilter('lookup', function(name, callback) {
-            Blog.getAuthors(options)
-                .spread(function success(entries) {
-                    callback(null, entries);
-                });
-        }, true);
-        function RemoteExtension() {
-            this.tags = ['getCategories'];
-            this.parse = function(parser, nodes, lexer) {
-                var tok = parser.nextToken();
-                var args = parser.parseSignature(null, true);
-                parser.advanceAfterBlockEnd(tok.value);
-                var body = parser.parseUntilBlocks('error', 'endgetCategories');
-                var errorBody = null;
-                parser.advanceAfterBlockEnd();
-                return new nodes.CallExtensionAsync(this, 'run', args, [body, errorBody]);
-            };
-            this.run = function(context, url, body, errorBody, callback) {
-                    Blog.getCategories(options)
-                        .spread(function success(entries) {
-                            //console.log("Entries---", entries);
-                            callback(null, entries);
-                        });
-            }
-        }
-        env.addExtension('RemoteExtension', new RemoteExtension());
-    }
 };
