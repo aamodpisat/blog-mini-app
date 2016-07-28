@@ -54,6 +54,7 @@ var Stack = contentstack.Stack();
          var postsQuery = this._getPosts();
          return postsQuery
              .where("category.title", category)
+             .descending('created_at')
              .includeCount()
              .skip(skip)
              .limit(limit)
@@ -69,6 +70,7 @@ var Stack = contentstack.Stack();
          var postsQuery = this._getPosts();
          return postsQuery
              .where("author.title", author)
+             .descending('created_at')
              .includeCount()
              .skip(skip)
              .limit(limit)
